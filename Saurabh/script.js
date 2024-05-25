@@ -1,4 +1,4 @@
-
+  
 let menuIcon = document.querySelector("#logo");
 let navbar = document.querySelector('.navbar');
 
@@ -59,5 +59,29 @@ loop: true
 
 
        ///////// // CONTACT PAGE CAPTURE DATA \\\\\\\\\\\\\\\\\\
+
+    
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+              function downloadResume() {
+                  var resumeUrl = "saurabh_resume_CV.pdf";  
+
+                  var link = document.createElement("a");
+                link.href = resumeUrl;
+                link.download = 'saurabh_resume_CV.pdf';  
+
+                  document.body.appendChild(link);
+
+                  link.click();
+
+                  document.body.removeChild(link);
+            }
+
+              document.getElementById("download_resume_btn").addEventListener("click", function () {
+                downloadResume();
+            });
+        });
+
 
     

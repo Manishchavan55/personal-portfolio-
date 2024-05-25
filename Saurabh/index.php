@@ -8,9 +8,10 @@
     <!-- box icon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="svg.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <link rel="stylesheet" href="style.css">
+    
     <style>
         @media (max-width: 768px) {
             .home .home-content a {
@@ -24,13 +25,18 @@
             .download .botao {
                 display: block;
             }
-
+            .home-content h3:nth-of-type(2) {
+            margin-bottom: -0.5rem;
+            }
             .about p {
 
                 font-size: 14px;
                 overflow: hidden;
                 height: 62vw;
                 text-align: justify;
+            }
+            .footer-text p {
+                 font-size: 12PX;
             }
         }
 
@@ -121,6 +127,9 @@
             100% {
                 transform: translateY(20px);
             }
+        }
+        .phone-media{
+            display: none;
         }
     </style>
 </head>
@@ -215,7 +224,7 @@
                 <a href="tel: 8208136708" target="_blank"><i class='bx bxs-phone-call'></i></a>
                 <a href="https://www.instagram.com/manish_chavan55/" target="_blank"><i
                         class="bx bxl-instagram"></i></a>
-                <a href="mailto:sbchavan7167@gmail.com" target="_blank"><i class='bx bxl-gmail'></i></a>
+                <a href="mailto: sbchavan7167@gmail.com" target="_blank"><i class='bx bxl-gmail'></i></a>
                 <a href="https://www.linkedin.com/in/saurabh-chavan-a4891b238/"><i class="bx bxl-linkedin"></i></a>
             </div>
 
@@ -345,79 +354,36 @@
             <div class="project-box">
                 <img src="Project Images/personal-portfolio.png" alt="">
                 <div class="project-layer">
-                    <h4> Web Design</h4>
+                    <h4> Personal Portfolio</h4>
 
                     <div class="project-links">
-                        <a href="https://github.com/manishff87/Personal-Portfolio" target="_blank"> <i class='bx bx-code-alt'></i></a>
-                        <a href=""><i class='bx bxl-go-lang'></i></a>
+                        <a href="https://github.com/Manishchavan55/personal-portfolio-" target="_blank"> <i class='bx bx-code-alt'></i></a>
+                        <a href="https://retrievable-servant.000webhostapp.com/"><i class='bx bxl-go-lang'></i></a>
                     </div>
                 </div>
             </div>
-
         </div>
         </div>
     </section>
-
-    <!-- contact section -->
     <section class="contact" id="contact">
         <h2 class="headding">Contact <span>Me!</span></h2>
         <p style="color: white; font-size: 20px;"><?php echo @$message; ?></p>
-        <form id="contact-form" action="" method="POST" class="contact-form">
+        <form id="contact-form"  method="POST" class="contact-form">
             <div class="input-box">
-                <input type="text" name="full_name" placeholder="Full Name" required>
+                <input type="text" name="name" placeholder="Full Name" required>
                 <input type="email" name="email" placeholder="Email" required>
             </div>
             <div class="input-box">
-                <input type="tel" name="mobile_number" placeholder="Mobile Number" required>
-                <input type="text" name="email_subject" placeholder="Email Subject" required>
+                <input type="tel" name="mobileNo" placeholder="Mobile Number" required>
+                <input type="text" name="emailSub" placeholder="Email Subject" required>
             </div>
             <textarea name="message" cols="20" rows="7" placeholder="Message"></textarea>
             <input type="submit" value="Send Message" class="btn" name="btnSubmit">
         </form>
     </section>
-
 <?php if (isset($submitted) && $submitted): ?>
     <script>window.scrollTo(0, 0);</script>
 <?php endif; ?>
-
-    <?php
-    
-      $con = mysqli_connect("sql113.infinityfree.com", "if0_36607606", "tofp3gquEVuv7", "if0_36607606_Contact");
- 
-    if (!$con) {
-        die("Connection failed: " . mysqli_connect_error());
-    }  
-    
-    
-    
-    
-    if (isset($_POST['btnSubmit'])) {
-        $full_name = $_POST['full_name'];
-        $email = $_POST['email'];
-        $mobile_number = $_POST['mobile_number'];
-        $email_subject = $_POST['email_subject'];
-        $message = $_POST['message'];
-     
-        $full_name = mysqli_real_escape_string($con, $full_name);
-        $email = mysqli_real_escape_string($con, $email);
-        $mobile_number = mysqli_real_escape_string($con, $mobile_number);
-        $email_subject = mysqli_real_escape_string($con, $email_subject);
-        $message = mysqli_real_escape_string($con, $message);
-    
-        $query = "INSERT INTO `contact-data` (`Full_name`, `Email`, `Contact_no`, `Email_sub`, `Message`) VALUES ('$full_name', '$email', '$mobile_number', '$email_subject', '$message')";
-    
-        if (mysqli_query($con, $query)) {
-            echo "<script>alert('Thanks for visiting ! 🙏 I will get back to you shortly.🚸 🧋');</script>";
-            $submitted = true; 
-        }  
-    }
-     
-    
-
-?>
-
-
- 
     <footer class="footer">
         <div class="footer-text">
             <p>Copyrights &copy; 2023 by <span>S</span>aurabh | All Rights Reserved.</p>
@@ -428,10 +394,74 @@
             </a>
         </div>
     </footer>
-    <script src="script.js"></script>
 
-    <script>
-          
+    
+<script>
+      
+let menuIcon = document.querySelector("#logo");
+let navbar = document.querySelector('.navbar');
+
+menuIcon.onclick = () => {
+    menuIcon.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
+};
+
+let section = document.querySelectorAll('section');
+let navLinks = document.querySelectorAll('header nav a');
+
+window.onscroll = () => {
+    section.forEach(sec => {
+        let top = window.scrollY;
+        let offset = sec.offsetTop - 150;
+        let height = sec.offsetHeight;
+        let id = sec.getAttribute('id');
+
+        if (top >= offset && top < offset + height) {
+            navLinks.forEach(links => {
+                links.classList.remove('active');
+                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
+
+            });
+        };
+    });
+
+    let header = document.querySelector('header');
+    header.classList.toggle('sticky', window.scrolly > 100);
+
+
+    menuIcon.classList.remove('bx-x');
+    navbar.classList.remove('active');
+};
+
+
+
+ScrollReveal({
+distance: '80px',
+duration: 2000,
+delay: 200
+});
+
+ScrollReveal().reveal('.home, .headding', { origin: 'top' });
+ScrollReveal().reveal('.jumping-img, .home-content h1', { origin: 'left' });
+ScrollReveal().reveal('.about-img, .home-content p', { origin: 'right' });
+ScrollReveal().reveal('.home-img, .project-container, .about-content , .skill-container, .project-container,.contact-form', { origin: 'bottom' });
+
+
+
+const typed = new Typed('.multiple-text', {
+strings: ['Front-End Developer..!', 'Back-End Developer..!', 'Full-stack Developer..!', 'Freelancer..!'],
+typeSpeed: 100,
+backSpeed: 100,
+backDelay: 1000,
+loop: true
+});
+
+
+       ///////// // CONTACT PAGE CAPTURE DATA \\\\\\\\\\\\\\\\\\
+
+    
+
+
         document.addEventListener("DOMContentLoaded", function () {
               function downloadResume() {
                   var resumeUrl = "saurabh_resume_CV.pdf";  
@@ -451,8 +481,39 @@
                 downloadResume();
             });
         });
-    </script>
+
+
+    
+</script>
 
 </body>
 
 </html>
+<?php
+ $conn = new mysqli("localhost","id22214543_root","Manish_chavan55@","id22214543_contactdb");
+ 
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if(isset($_POST['btnSubmit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $mobile_number = $_POST['mobileNo'];
+    $email_subject = $_POST['emailSub'];
+    $message = $_POST['message'];
+
+    // Insert data into database
+    $sql = "INSERT INTO `contacts` (`name`, `email`, `mobileNo`, `emailSub`, `message`) VALUES('$name', '$email','$mobile_number','$email_subject', '$message')";
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('Thanks for visiting..! 🙏 I will get back to you shortly.');</script>";
+        $submitted=true;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Close the database connection
+$conn->close();
+?>
